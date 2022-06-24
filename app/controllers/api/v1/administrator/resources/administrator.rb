@@ -1,6 +1,6 @@
 class Api::V1::Administrator::Resources::Administrator < Grape::API
   resource :administrator do
-    desc "Get List Administrator"    
+    desc "Get List Administrator"
     params do
       optional :q, type: String, desc: "Your key search"
     end
