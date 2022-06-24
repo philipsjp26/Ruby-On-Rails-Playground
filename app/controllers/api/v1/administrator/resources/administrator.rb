@@ -25,7 +25,7 @@ class Api::V1::Administrator::Resources::Administrator < Grape::API
       requires :email, type: String, allow_blank: false, regexp: /.+@.+/
       requires :password, type: String
       requires :role_id, type: Integer
-      optional :profile_image, type: File
+      optional :profile_image, type: File 
     end
     post "/" do
       role = Role.find(params.role_id)
