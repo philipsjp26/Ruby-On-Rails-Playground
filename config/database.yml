@@ -1,0 +1,26 @@
+pgsql: &pgsql
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: <%= ENV['DB_HOST'] %>
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+
+defaults: &defaults
+  <<: *<%= ENV['DB'] || "pgsql" %>
+
+development:
+  <<: *defaults
+  database: <%= ENV['DB_NAME'] %>_development
+
+test:
+  <<: *defaults
+  database: <%= ENV['DB_NAME'] %>
+
+production:
+  <<: *defaults
+  database: <%= ENV['DB_NAME'] %>
+
+staging:
+  <<: *defaults
+  database: <%= ENV['DB_NAME'] %>
