@@ -1,4 +1,4 @@
-class AuthStrategies
+class Oauth::AuthStrategies
   class << self
     attr_accessor :api_context
 
