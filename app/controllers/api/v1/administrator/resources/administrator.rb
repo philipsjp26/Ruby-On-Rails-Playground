@@ -1,12 +1,13 @@
 class Api::V1::Administrator::Resources::Administrator < Grape::API
   resource :administrator do
-    desc "Get List Administrator"    
+    desc "Get List Administrator"
     params do
       optional :q, type: String, desc: "Your key search"
     end
+    oauth "super_admin"
     get "/" do
       data = paginate User.all.select(:id, :username, :created_at)
-      # puts "check #{current_user.to_json}"
+
       # puts "check #{env[Grape::Env::API_ENDPOINT].namespace}"
 
       present :administrator, data
