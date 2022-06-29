@@ -15,7 +15,7 @@ RUN bundle check || bundle install
 
 
 COPY . /app
-
+LABEL org.opencontainers.image.source=https://github.com/philipsjp26/Ruby-On-Rails-Playground
 RUN chmod +x /app/entrypoint/entrypoint.sh
 ENTRYPOINT ["/app/entrypoint/entrypoint.sh"]
 EXPOSE 3000 
