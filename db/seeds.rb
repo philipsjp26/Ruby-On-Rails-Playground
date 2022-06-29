@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-Role.find_or_create_by! name: "super_admin"
-Role.find_or_create_by! name: "admin"
-Role.find_or_create_by! name: "user"
+if Role.first.nil?
+  roles = [{ name: "super_admin" }, { name: "admin" }, { name: "user" }]
+  Role.insert_all(roles)
+end
 
-Doorkeeper::Application.find_or_create_by! name: "API_RBAC", redirect_uri: "https://localhost:3000"
+Doorkeeper::Application.find_or_create_by! name: "playground", redirect_uri: "https://localhost:3000"

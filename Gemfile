@@ -72,3 +72,4 @@ gem "racecar"
 
 # NOTES : For pg_config Mac M1
 # gem install pg -- --with-pg-config=/Applications/Postgres.app/Contents/Versions/latest/bin/pg_config
+# sudo apt install libpq-dev
