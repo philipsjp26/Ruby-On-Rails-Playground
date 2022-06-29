@@ -1,14 +1,27 @@
 version: '3'
 services:
-  app:
-    container_name: ruby_playground
-    build: .
-    command: bundle exec rails -s -p 3000 -b '0.0.0.0'
+
+  jenkins:
+    container_name: jenkins
+    image: jenkins/jenkins:lts
+    privileged: true
+    user: root
     ports:
-      - "3001:3000"
+      - 8080:8080
+    volumes:
+      - jenkins:/data/jenkins
+      - /var/run/docker.sock:/var/run/docker.sock
+  postgres:
+    container_name: postgres
+    image: postgres
     environment:
-      - DB_NAME=""
-      - DB_HOST=""
-      - DB_USER=""
-      - DB_PASSWORD=""
-    restart: on-failure
+      - POSTGRES_PASSWORD=default
+      - PG_DATA=/data/postgres
+    ports:
+      - 5433:5432
+    volumes:
+      - postgres:/data/postgres
+
+volumes:
+  postgres:
+  jenkins:

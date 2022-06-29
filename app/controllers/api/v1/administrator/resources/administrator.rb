@@ -4,7 +4,7 @@ class Api::V1::Administrator::Resources::Administrator < Grape::API
     params do
       optional :q, type: String, desc: "Your key search"
     end
-    oauth "super_admin"
+    # oauth "super_admin"
     get "/" do
       data = paginate User.all.select(:id, :username, :created_at)
       present :administrator, data

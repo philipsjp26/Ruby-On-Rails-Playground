@@ -7,7 +7,7 @@ module ExceptionHandler
           message = "Unauthorize"
         elsif e.class.name == "Oauth::Errors::OAuthForbiddenError"
           code = 403
-          message = 'Forbidden errors'
+          message = "Forbidden errors"
         end
         results = {
           code: code,
