@@ -9,5 +9,14 @@ class DoorkeeperHelper
       )
       token
     end
+
+    def destroy(client_id, client_secret = nil, user)
+      app = Doorkeeper::Application.where(uid: client_id).try(:first)
+      if app.nil?
+        return 422, "application not found"
+      else
+        user.logout
+      end
+    end
   end
 end

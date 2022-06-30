@@ -4,13 +4,14 @@ class Api::V1::Administrator::Resources::Administrator < Grape::API
     params do
       optional :q, type: String, desc: "Your key search"
     end
-    # oauth "super_admin"
+    oauth "super_admin"
     get "/" do
       data = paginate User.all.select(:id, :username, :created_at)
       present :administrator, data
     end
 
     desc "Get By Id"
+    oauth "super_admin"
     get "/:id" do
       data = User.find_by_id(params.id)
       error!("User not found", env["api.response.code"] = 422) unless data.present?
@@ -25,6 +26,7 @@ class Api::V1::Administrator::Resources::Administrator < Grape::API
       requires :role_id, type: Integer
       optional :profile_image, type: File
     end
+    oauth "super_admin"
     post "/" do
       role = Role.find(params.role_id)
 
