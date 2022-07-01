@@ -3,8 +3,7 @@ services:
 
   jenkins:
     container_name: jenkins
-    image: jenkins/jenkins:lts
-    privileged: true
+    image: jenkins/jenkins:lts    
     user: root
     ports:
       - 8080:8080
@@ -18,7 +17,7 @@ services:
       - POSTGRES_PASSWORD=default
       - PG_DATA=/data/postgres
     ports:
-      - 5433:5432
+      - "127.0.0.1:5433:5432"
     volumes:
       - postgres:/data/postgres
 
