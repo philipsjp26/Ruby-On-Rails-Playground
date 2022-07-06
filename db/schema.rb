@@ -10,9 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_06_105439) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_06_182644) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activity_logs", force: :cascade do |t|
+    t.bigint "users_id"
+    t.datetime "signin_at"
+    t.datetime "signout_at"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["users_id"], name: "index_activity_logs_on_users_id"
+  end
+
+  create_table "menu_roles_access", force: :cascade do |t|
+    t.bigint "menu_id"
+    t.integer "user_id"
+    t.json "actions"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["menu_id"], name: "index_menu_roles_access_on_menu_id"
+  end
+
+  create_table "menus", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.bigint "resource_owner_id", null: false
@@ -71,24 +96,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_06_105439) do
     t.index ["user_id"], name: "index_roles_users_on_user_id"
   end
 
-  create_table "user_images", force: :cascade do |t|
-    t.string "profile_image"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_user_images_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
+    t.string "fullname"
     t.string "password"
     t.datetime "registered_at"
+    t.datetime "approved_at"
+    t.datetime "rejected_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "activity_logs", "users", column: "users_id"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
-  add_foreign_key "user_images", "users"
 end
