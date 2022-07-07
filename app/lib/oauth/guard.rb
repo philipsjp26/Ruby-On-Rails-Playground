@@ -15,16 +15,16 @@ module Oauth
         @_doorkeeper_request
       end
 
-      def endpoint_protected?
+      def endpoint_protected?        
         has_auth_scopes?
       end
 
       def before
-        AuthStrategies.api_context = context
+        AuthStrategies.api_context = context                
         return unless endpoint_protected?
         context.extend(Oauth::AuthMethods::CustomAuth)
         self.doorkeeper_request = env
-
+        
         context.set_current_user = authenticate
       end
 
@@ -49,7 +49,7 @@ module Oauth
 
       private
 
-      def has_auth_scopes?
+      def has_auth_scopes?        
         endpoint_authorizations &&
           endpoint_authorizations.key?(:scopes) &&
           endpoint_authorizations[:scopes].any?
@@ -61,7 +61,7 @@ module Oauth
 
       private
 
-      def endpoint_authorizations
+      def endpoint_authorizations        
         context.options[:route_options][:auth]
       end
     end
