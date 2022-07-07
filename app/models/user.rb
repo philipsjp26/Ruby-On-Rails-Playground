@@ -1,11 +1,7 @@
 class User < ApplicationRecord
-  validates :email, uniqueness: true
-  validates :username, presence: true, uniqueness: true, length: { minimum: 5 }
-
-  has_many :user_images, dependent: :destroy
+  has_many :menu_roles_access, foreign_key: "user_id"
+  has_and_belongs_to_many :menus, join_table: :menu_roles_access, foreign_key: "user_id"
   has_and_belongs_to_many :roles, join_table: :roles_users, dependent: :destroy
 
-  def validate_password!(password)
-    password == BCrypt::Password.new(self.password)
-  end
+  alias_attribute :menu_actions, :menu_roles_access  
 end

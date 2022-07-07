@@ -11,7 +11,11 @@ services:
       - jenkins:/data/jenkins
       - /var/run/docker.sock:/var/run/docker.sock
   postgres:
-    container_name: postgres
+    container_name: postgres-db
+    networks:
+      - ruby
+    links:
+      - ruby-playground
     image: postgres
     environment:
       - POSTGRES_PASSWORD=default
@@ -24,3 +28,7 @@ services:
 volumes:
   postgres:
   jenkins:
+networks:
+  ruby:
+    name: ruby-network
+    driver: bridge

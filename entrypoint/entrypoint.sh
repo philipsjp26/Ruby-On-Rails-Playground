@@ -14,3 +14,4 @@ if [[ $? != 0 ]]; then
 fi
 rm -rf tmp/pids/server.pid
 bundle exec rails db:seed
+bundle exec rails s -e development -p 3000
