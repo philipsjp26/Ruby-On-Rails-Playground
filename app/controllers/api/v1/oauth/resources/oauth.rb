@@ -7,7 +7,7 @@ class Api::V1::Oauth::Resources::Oauth < Grape::API
     end
     post "/login" do
       user = User.find_by_username(params.username)
-      error!("username not found", 422) if user.nil?
+      error!("username not found", env["api.response.code"] = 422) if user.nil?
 
       token = DoorkeeperHelper.access_token(user.id, true)
 
@@ -16,7 +16,7 @@ class Api::V1::Oauth::Resources::Oauth < Grape::API
 
     desc "Get me"
     oauth "super_admin", "admin", "public"
-    get "/me" do      
+    get "/me" do
       present :me, current_user, with: Api::V1::Oauth::Entities::Me
     end
 
@@ -28,7 +28,7 @@ class Api::V1::Oauth::Resources::Oauth < Grape::API
     oauth "super_admin"
     post "/logout" do
       app = DoorkeeperHelper.destroy(params.client_id, params.client_secret, current_user)
-      statusCode, message = app      
+      statusCode, message = app
       error!(message, statusCode) if statusCode == 422
 
       present :oauth, "Success Logout"

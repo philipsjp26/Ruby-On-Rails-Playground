@@ -8,6 +8,12 @@ module ExceptionHandler
         elsif e.class.name == "Oauth::Errors::OAuthForbiddenError"
           code = 403
           message = "Forbidden errors"
+        elsif e.class.name == "Grape::Exceptions::ValidationErrors"
+          code = 422
+          message = e.as_json_custom
+        elsif e.class.name == "Grape::Exceptions::MethodNotAllowed"
+          code = 405
+          message = "Method not allowed"
         end
         results = {
           code: code,
