@@ -81,5 +81,18 @@ class Api::V1::Admin::Resources::Users < Grape::API
       env["api.response.message"] = "Success update data"
       present :users, true
     end
+
+    desc "Destroy user"
+    params do
+      requires :username, type: String
+    end
+    delete "/destroy" do
+      user = find_user(params[:username])
+      error!("User not found") unless user.present?
+
+      user.destroy
+      env["api.response.message"] = "Success destroy user"
+      present :users, true
+    end
   end
 end
