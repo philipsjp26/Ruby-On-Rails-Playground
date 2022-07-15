@@ -42,6 +42,7 @@ class Api::V1::Admin::Resources::Users < Grape::API
       optional :start_date, type: Date
       optional :end_date, type: Date
     end
+    oauth "super_admin", "admin"
     get "/list" do
       data = User.list(params)
       present :users, data, with: Api::V1::Admin::Entities::Users
@@ -57,6 +58,7 @@ class Api::V1::Admin::Resources::Users < Grape::API
         requires :actions, type: JSON
       end
     end
+    oauth "super_admin", "admin"
     put "/edit" do
       user = find_user(params[:username])
       error!("username or data already exist", env["api.response.code"] = 422) unless user.present?
@@ -86,6 +88,7 @@ class Api::V1::Admin::Resources::Users < Grape::API
     params do
       requires :username, type: String
     end
+    oauth "super_admin", "admin"
     delete "/destroy" do
       user = find_user(params[:username])
       error!("User not found") unless user.present?
