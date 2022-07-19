@@ -20,7 +20,7 @@ class Api::V1::Admin::Resources::Users < Grape::API
       requires :password, type: String
       requires :roles, type: Array
     end
-    oauth "super_admin"
+    # oauth "super_admin"
     post "/create" do
       user = find_user(params[:username])
       error!("username or data already exist", env["api.response.code"] = 422) if user.present?
@@ -42,7 +42,7 @@ class Api::V1::Admin::Resources::Users < Grape::API
       optional :start_date, type: Date
       optional :end_date, type: Date
     end
-    oauth "super_admin", "admin"
+    # oauth "super_admin", "admin"
     get "/list" do
       data = paginate User.list(params)
       present :users, data, with: Api::V1::Admin::Entities::Users
@@ -58,7 +58,7 @@ class Api::V1::Admin::Resources::Users < Grape::API
         requires :actions, type: JSON
       end
     end
-    oauth "super_admin", "admin"
+    # oauth "super_admin", "admin"
     put "/edit" do
       user = find_user(params[:username])
       error!("username or data already exist", env["api.response.code"] = 422) unless user.present?
@@ -73,15 +73,16 @@ class Api::V1::Admin::Resources::Users < Grape::API
         if params.menu_access.present?
           params[:menu_access].each do |v|
             menu = find_menu(v.menu_id)
-            user.menu_actions.build(menu: menu, actions: v.actions).try(:save!)
+            user.menu_actions.build(menu: menu, actions: v.actions).try(:save!) unless user.menu_actions.present?
+            user.menu_actions.update(menu: menu, actions: v.actions) if user.menu_actions.present?
           end
         end
       end
 
       user.roles << Role.where(id: params[:roles]) unless user.roles.present?
-
+      user.reload
       env["api.response.message"] = "Success update data"
-      present :users, true
+      present :users, user
     end
 
     desc "Destroy user"

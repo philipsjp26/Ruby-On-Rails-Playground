@@ -53,7 +53,7 @@ gem "caxlsx"
 gem "rufus-scheduler"
 
 # Background Jobs
-gem "delayed_job_active_record"
+gem "sidekiq"
 
 # Soft delete
 gem "acts_as_paranoid"
