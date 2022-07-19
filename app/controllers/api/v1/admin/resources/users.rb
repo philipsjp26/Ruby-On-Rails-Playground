@@ -44,7 +44,7 @@ class Api::V1::Admin::Resources::Users < Grape::API
     end
     oauth "super_admin", "admin"
     get "/list" do
-      data = User.list(params)
+      data = paginate User.list(params)
       present :users, data, with: Api::V1::Admin::Entities::Users
     end
 
