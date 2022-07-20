@@ -6,7 +6,7 @@ pipeline {
             steps {
                 sh "docker rm -f ruby-playground"
                 sh "docker build -t ghcr.io/philipsjp26/ruby-playground:${BUILD_NUMBER} ."
-                sh "docker run -it ghcr.io/philipsjp26/ruby-playground:${BUILD_NUMBER} -d -p 3000:3000 \
+                sh "docker run ghcr.io/philipsjp26/ruby-playground:${BUILD_NUMBER} -d -p 3000:3000 \
                  --entrypoint /entrypoint/entrypoint.sh \
                  -e RAILS_ENV=${RAILS_ENV} \
                  -e DB_NAME= ${DB_NAME} \
