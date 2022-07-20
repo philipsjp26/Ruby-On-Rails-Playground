@@ -3,12 +3,6 @@ pipeline {
 
     stages {        
         stage('Build') {
-            when {
-                anyOf {
-                    branch 'development'
-                    branch 'philips/linux'
-                }
-            }
             steps {
                 // sh "docker rm -f ruby-playground"
                 // sh "docker build -t ghcr.io/philipsjp26/$imagename:$BUILD_NUMBER ."
