@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Deploy image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'ghcr', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'd4f727d4-36ba-4f6f-938e-be9fe3db95c9', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh 'docker logout'
                     sh "echo ${PASSWORD} | docker login ghcr.io -u ${USERNAME} --password-stdin"
                     sh "docker push ghcr.io/philipsjp26/ruby-playground:${BUILD_NUMBER}"
