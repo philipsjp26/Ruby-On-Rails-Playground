@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Remove unused image') {
             steps {
-                sh "docker rmi ruby-playground:${BUILD_NUMBER}"
+                sh "docker image prune --all --filter until=23m"
             }
         }
     }
