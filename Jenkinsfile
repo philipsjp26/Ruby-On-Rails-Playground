@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    environment {
-        USERNAME = credentials('username')
-        PASSWORD = credentials('password')
-    }
     stages {
         stage('Build') {
             steps {
@@ -20,9 +16,11 @@ pipeline {
         }
         stage('Deploy image') {
             steps {
-                sh 'docker logout'
-                sh "echo ${PASSWORD} | docker login ghcr.io -u ${USERNAME} --password-stdin"
-                sh "docker push ghcr.io/philipsjp26/ruby-playground:${BUILD_NUMBER}"
+                withCredentials([usernamePassword(credentialsId: 'ghcr', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh 'docker logout'
+                    sh "echo ${PASSWORD} | docker login ghcr.io -u ${USERNAME} --password-stdin"
+                    sh "docker push ghcr.io/philipsjp26/ruby-playground:${BUILD_NUMBER}"
+                }                
             }
         }
         stage('Remove unused image') {
