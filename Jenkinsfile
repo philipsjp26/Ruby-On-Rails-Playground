@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    stages {
+    stages {        
         stage('Build') {
             when {
                 anyOf {
@@ -9,6 +9,7 @@ pipeline {
                 }
             }
             steps {
+                sh "docker rm -f ruby-playground"
                 sh "docker build -t ghcr.io/philipsjp26/$imagename:$BUILD_NUMBER ."
                 sh "docker run -it ghcr.io/philipsjp26/$imagename:$BUILD_NUMBER -d -p 3000:3000 \
                  --entrypoint /entrypoint/entrypoint.sh \
