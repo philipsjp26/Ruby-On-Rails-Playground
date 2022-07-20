@@ -6,6 +6,7 @@ pipeline {
             when {
                 anyOf {
                     branch 'development'
+                    branch 'philips/linux'
                 }
             }
             steps {
