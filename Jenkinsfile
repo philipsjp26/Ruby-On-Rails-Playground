@@ -11,6 +11,7 @@ pipeline {
                  -e DB_HOST='${DB_HOST}' \
                  -e DB_USER='${DB_USER}' \
                  -e DB_PASSWORD='${DB_PASSWORD}' \
+                 -e DB_PORT='${DB_PORT}' \
                  --name ruby-playground"
             }
         }
