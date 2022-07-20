@@ -9,7 +9,9 @@ services:
       - 8080:8080
     volumes:
       - jenkins:/data/jenkins
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock      
+    networks:
+      - ruby
 
   cache:
     container_name: redis-dev
