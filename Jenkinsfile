@@ -1,10 +1,10 @@
 pipeline {
     agent any
+    environment {
+        USERNAME = credentials('username')
+        PASSWORD = credentials('password')
+    }
     stages {
-        environment {
-            USERNAME = credentials('username')
-            PASSWORD = credentials('password')
-        }
         stage('Build') {
             steps {
                 sh 'docker rm -f ruby-playground'
