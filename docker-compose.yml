@@ -21,20 +21,20 @@ services:
     volumes:
       - cache:/data
 
-  postgres:
-    container_name: postgres-db
-    networks:
-      - ruby
-    # links:
-    #   - ruby-playground
-    image: postgres
-    environment:
-      - POSTGRES_PASSWORD=default
-      - PG_DATA=/data/postgres
-    ports:
-      - "127.0.0.1:5433:5432"
-    volumes:
-      - postgres:/data/postgres
+  # postgres:
+  #   container_name: postgres-db
+  #   networks:
+  #     - ruby
+  #   # links:
+  #   #   - ruby-playground
+  #   image: postgres
+  #   environment:
+  #     - POSTGRES_PASSWORD=default
+  #     - PG_DATA=/data/postgres
+  #   ports:
+  #     - "127.0.0.1:5433:5432"
+  #   volumes:
+  #     - postgres:/data/postgres
 
 volumes:
   postgres:
