@@ -19,7 +19,7 @@ pipeline {
                 //  -e CLOUDINARY_SECURE = $CLOUDINARY_SECURE \
                 //  --name ruby-playground \
                 //  "
-                echo ${DB_NAME}
+                echo "${DB_NAME}"
             }
         }
         // stage('Deploy image') {
