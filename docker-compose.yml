@@ -38,8 +38,7 @@ services:
   #   volumes:
   #     - postgres:/data/postgres
 
-volumes:
-  postgres:
+volumes:  
   jenkins:
   cache:
     driver: local
