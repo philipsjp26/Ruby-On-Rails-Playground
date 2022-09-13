@@ -1,10 +1,17 @@
 class Admin::Api::V1::Agents::Resources::Agent < Grape::API
+  helpers Grape::Pagy::Helpers
+
   resource "agents" do
     desc "List agents"
     # oauth "super_admin"
+    params do
+      use :pagy, items_param: :per_page, # Accept per_page=N param to limit items.
+                 items: 25,               # If per_page param is blank, default to 2.
+                 max_items: 25
+    end
     get "/" do
-      agent = paginate Agent.all
-      present :agent, agent
+      data = pagy Agent.all
+      present :agent, data
     end
 
     desc "Add agent"
