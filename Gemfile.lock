@@ -165,7 +165,14 @@ GEM
       reline (>= 0.3.0)
     jaro_winkler (1.5.4)
     json (2.6.2)
-    king_konf (1.0.0)
+    karafka (2.0.21)
+      karafka-core (>= 2.0.4, < 3.0.0)
+      rdkafka (>= 0.12)
+      thor (>= 0.20)
+      waterdrop (>= 2.4.1, < 3.0.0)
+      zeitwerk (~> 2.3)
+    karafka-core (2.0.4)
+      concurrent-ruby (>= 1.1)
     kramdown (2.4.0)
       rexml
     kramdown-parser-gfm (1.1.0)
@@ -208,6 +215,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.8-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.13.8-x86_64-linux)
+      racc (~> 1.4)
     pagy (5.10.1)
       activesupport
     parallel (1.22.1)
@@ -219,9 +228,6 @@ GEM
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.6.0)
-    racecar (2.8.2)
-      king_konf (~> 1.0.0)
-      rdkafka (~> 0.12.0)
     rack (2.2.4)
     rack-accept (0.4.5)
       rack (>= 0.4)
@@ -321,6 +327,10 @@ GEM
       unf_ext
     unf_ext (0.0.8.2)
     unicode-display_width (2.2.0)
+    waterdrop (2.4.2)
+      karafka-core (>= 2.0.2, < 3.0.0)
+      rdkafka (>= 0.10)
+      zeitwerk (~> 2.3)
     webrick (1.7.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
@@ -331,6 +341,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   acts_as_paranoid
@@ -347,10 +358,10 @@ DEPENDENCIES
   grape-middleware-logger
   grape-pagy
   hashie
+  karafka
   nokogiri
   pg
   puma (~> 5.0)
-  racecar
   rails (~> 7.0.2)
   rest-client
   rufus-scheduler
