@@ -1,0 +1,49 @@
+version: '3'
+services:
+
+  jenkins:
+    container_name: jenkins
+    image: jenkins/jenkins:lts
+    user: root
+    ports:
+      - 8080:8080
+    volumes:
+      - jenkins:/data/jenkins
+      - /var/run/docker.sock:/var/run/docker.sock      
+    networks:
+      - ruby
+
+  cache:
+    container_name: redis-dev
+    image: redis:7.0.3
+    restart: always
+    command: redis-server --save 20 1 --loglevel warning --requirepass adminadmin    
+    ports:
+      - 6379:6379
+    volumes:
+      - cache:/data
+
+  # postgres:
+  #   container_name: postgres-db
+  #   networks:
+  #     - ruby
+  #   # links:
+  #   #   - ruby-playground
+  #   image: postgres
+  #   environment:
+  #     - POSTGRES_PASSWORD=default
+  #     - PG_DATA=/data/postgres
+  #   ports:
+  #     - "127.0.0.1:5433:5432"
+  #   volumes:
+  #     - postgres:/data/postgres
+
+volumes:  
+  jenkins:
+  cache:
+    driver: local
+
+networks:
+  ruby:
+    name: ruby-network
+    driver: bridge

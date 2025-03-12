@@ -1,21 +1,21 @@
-module Errors
-  class BaseError < StandardError
-    def initialize(message)
-      super(message)
+module Oauth
+  module Errors
+    class BaseError < StandardError
+      def initialize(message)
+        super(message)
+      end
     end
-  end
 
-  class OAuthUnauthorizedError < BaseError
-    def initialize
-      super("Invalid access token")
+    class OAuthUnauthorizedError < BaseError
+      def initialize
+        super("Invalid access token")
+      end
     end
-  end
 
-  class OAuthForbiddenError < BaseError
-    def initialize
-      super("Forbidden access")
+    class OAuthForbiddenError < BaseError
+      def initialize
+        super("Forbidden access")
+      end
     end
   end
 end
-
-# frozen_string_literal: true

@@ -5,6 +5,7 @@ pgsql: &pgsql
   host: <%= ENV['DB_HOST'] %>
   username: <%= ENV['DB_USER'] %>
   password: <%= ENV['DB_PASSWORD'] %>
+  port: <%= ENV['DB_PORT'] %>
 
 defaults: &defaults
   <<: *<%= ENV['DB'] || "pgsql" %>
@@ -15,12 +16,8 @@ development:
 
 test:
   <<: *defaults
-  database: <%= ENV['DB_NAME'] %>
+  database: <%= ENV['DB_NAME'] %>_test
 
 production:
   <<: *defaults
-  database: <%= ENV['DB_NAME'] %>
-
-staging:
-  <<: *defaults
-  database: <%= ENV['DB_NAME'] %>
+  database: <%= ENV['DB_NAME'] %>_production

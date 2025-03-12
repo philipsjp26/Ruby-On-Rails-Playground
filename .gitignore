@@ -35,3 +35,4 @@
 
 test 
 public/uploads
+config/secrets.yml
