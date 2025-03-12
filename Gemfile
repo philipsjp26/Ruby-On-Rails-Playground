@@ -26,6 +26,7 @@ end
 group :development do
   gem 'solargraph'  
   gem "spring"
+  gem "rubocop"
 end
 
 # set up enviroment to file

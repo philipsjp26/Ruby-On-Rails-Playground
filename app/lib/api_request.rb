@@ -2,8 +2,10 @@ class ApiRequest
   private_class_method :new
   attr_reader :conn
 
-  def self.http_get(url, headers = {})
-    new.conn.get(url, headers)
+  def self.http_get(url, params = {}, headers = {})
+    new.conn.get(url, params) do |req|
+      req.headers.merge!(headers)
+    end
   rescue Faraday::Response::RaiseError => e
     e.response
   end

@@ -1,0 +1,645 @@
+{
+	"info": {
+		"_postman_id": "e86df59f-e3d3-4419-866d-1d8eba0c402a",
+		"name": "Atask Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40506259"
+	},
+	"item": [
+		{
+			"name": "Retrieve all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ":3000/api/v1/users",
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"testing@gmail.com\",\n    \"password\": \"admin123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": ":3000/api/v1/users/login",
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"testing@gmail.com\",\n    \"password\": \"admin123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": ":3000/api/v1/users/login",
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"70e9f7f4e5cdc64f2c438f6e253d75c9\""
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "X-Request-Id",
+							"value": "bf3e3d02-db91-41ef-a4ac-e6c624167e36"
+						},
+						{
+							"key": "X-Runtime",
+							"value": "0.316979"
+						},
+						{
+							"key": "Server-Timing",
+							"value": "endpoint_run_filters.grape;dur=0.01513671875, endpoint_run_validators.grape;dur=0.060791015625, sql.active_record;dur=4.6640625, instantiation.active_record;dur=3.966552734375, endpoint_render.grape;dur=227.41796875, endpoint_run.grape;dur=227.737060546875, format_response.grape;dur=0.063720703125"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Success login\",\n    \"data\": {\n        \"users\": \"eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDE4NzQ4NjZ9.6914b4b47d32a0450d6bfcd7e374871209ff02acb9f6e8f33ae2752fdbafc6a2\"\n    }\n}"
+				},
+				{
+					"name": "404 User not found",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"testing@gmail.com\",\n    \"password\": \"admin1123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": ":3000/api/v1/users/login",
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Request-Id",
+							"value": "52b0fe9c-6b25-43a2-ae73-49c73226f198"
+						},
+						{
+							"key": "X-Runtime",
+							"value": "0.334208"
+						},
+						{
+							"key": "Server-Timing",
+							"value": "endpoint_run_filters.grape;dur=0.011474609375, endpoint_run_validators.grape;dur=0.069091796875, sql.active_record;dur=5.471435546875, instantiation.active_record;dur=4.169921875, endpoint_render.grape;dur=230.194580078125, endpoint_run.grape;dur=230.717041015625"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 404,\n    \"messages\": [\n        \"user not found\"\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Current user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDE4NzQ4NjZ9.6914b4b47d32a0450d6bfcd7e374871209ff02acb9f6e8f33ae2752fdbafc6a2",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ":3000/api/v1/users/me",
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"me"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ":3000/api/v1/users/me",
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"me"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"96221c5747f6207bcba7e70a7dfe5576\""
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "X-Request-Id",
+							"value": "3ebbcd35-977e-47f4-a515-768bfcc7891d"
+						},
+						{
+							"key": "X-Runtime",
+							"value": "0.107788"
+						},
+						{
+							"key": "Server-Timing",
+							"value": "endpoint_run_filters.grape;dur=0.019775390625, endpoint_run_validators.grape;dur=0.0029296875, sql.active_record;dur=3.67138671875, instantiation.active_record;dur=3.778564453125, endpoint_render.grape;dur=9.39501953125, endpoint_run.grape;dur=9.72314453125, format_response.grape;dur=0.141845703125"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Success retrieve data\",\n    \"data\": {\n        \"user\": 1\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get current balance wallet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ1c2VyX2lkIjoyLCJleHAiOjE3NDE4NzY3NjF9.5751c7194296f3fd8d798114a8a88a46205530754dc004aead0d13ba86d50aff",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ":3000/api/v1/wallets/:entity?owner_type=user",
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"wallets",
+						":entity"
+					],
+					"query": [
+						{
+							"key": "owner_type",
+							"value": "user"
+						}
+					],
+					"variable": [
+						{
+							"key": "entity",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "401 Unauthorized",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ":3000/api/v1/wallets/:entity?owner_type=user",
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"wallets",
+								":entity"
+							],
+							"query": [
+								{
+									"key": "owner_type",
+									"value": "user"
+								}
+							],
+							"variable": [
+								{
+									"key": "entity",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Request-Id",
+							"value": "a19eb53a-6c56-484d-8040-07c38cd4e9b2"
+						},
+						{
+							"key": "X-Runtime",
+							"value": "0.132800"
+						},
+						{
+							"key": "Server-Timing",
+							"value": "endpoint_run_filters.grape;dur=0.020263671875, endpoint_run_validators.grape;dur=0.117431640625, endpoint_render.grape;dur=0.083984375, endpoint_run.grape;dur=0.52392578125"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 401,\n    \"messages\": [\n        \"Unauthorized\"\n    ]\n}"
+				},
+				{
+					"name": "200 Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ":3000/api/v1/wallets/:entity?owner_type=user",
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"wallets",
+								":entity"
+							],
+							"query": [
+								{
+									"key": "owner_type",
+									"value": "user"
+								}
+							],
+							"variable": [
+								{
+									"key": "entity",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"18d433f513bac417d1e567ecef9dfda4\""
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "X-Request-Id",
+							"value": "a6500b29-c0f6-41b1-812a-32ee020a21a8"
+						},
+						{
+							"key": "X-Runtime",
+							"value": "0.006889"
+						},
+						{
+							"key": "Server-Timing",
+							"value": "endpoint_run_filters.grape;dur=0.017578125, endpoint_run_validators.grape;dur=0.1376953125, sql.active_record;dur=1.683837890625, instantiation.active_record;dur=0.137939453125, endpoint_render.grape;dur=3.111083984375, endpoint_run.grape;dur=3.666015625, format_response.grape;dur=0.19677734375"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Success retrieve data\",\n    \"data\": {\n        \"wallet\": {\n            \"balance\": \"1000000.0\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Credit wallet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ1c2VyX2lkIjoyLCJleHAiOjE3NDE4Nzc2MjZ9.ff7c9620d7fb1c6b2d913769cbf2e73ea7432193a246c190cb406d4b2b8d0bb5",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 1000,\n    \"owner_type\": \"user\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": ":3000/api/v1/wallets/:entity_id/credit",
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"wallets",
+						":entity_id",
+						"credit"
+					],
+					"variable": [
+						{
+							"key": "entity_id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 1000,\n    \"owner_type\": \"user\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": ":3000/api/v1/wallets/:entity_id/credit",
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"wallets",
+								":entity_id",
+								"credit"
+							],
+							"variable": [
+								{
+									"key": "entity_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"a900aacdd96210f6dea4f3fa8f048913\""
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "X-Request-Id",
+							"value": "65dba49d-e90c-4361-9529-2d4934ca1a18"
+						},
+						{
+							"key": "X-Runtime",
+							"value": "0.038624"
+						},
+						{
+							"key": "Server-Timing",
+							"value": "sql.active_record;dur=32.55322265625, instantiation.active_record;dur=0.11328125, endpoint_run_filters.grape;dur=1.368408203125, endpoint_run_validators.grape;dur=0.095703125, endpoint_render.grape;dur=33.903564453125, endpoint_run.grape;dur=35.681396484375, format_response.grape;dur=0.17822265625"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Wallet credited successfully\",\n    \"data\": {\n        \"wallet\": {\n            \"balance\": \"1002000.0\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Debit wallet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ1c2VyX2lkIjoyLCJleHAiOjE3NDE4Nzc2MjZ9.ff7c9620d7fb1c6b2d913769cbf2e73ea7432193a246c190cb406d4b2b8d0bb5",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 1000,\n    \"owner_type\": \"user\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": ":3000/api/v1/wallets/:entity_id/debit",
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"wallets",
+						":entity_id",
+						"debit"
+					],
+					"variable": [
+						{
+							"key": "entity_id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 1000,\n    \"owner_type\": \"user\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": ":3000/api/v1/wallets/:entity_id/credit",
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"wallets",
+								":entity_id",
+								"credit"
+							],
+							"variable": [
+								{
+									"key": "entity_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"a900aacdd96210f6dea4f3fa8f048913\""
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "X-Request-Id",
+							"value": "65dba49d-e90c-4361-9529-2d4934ca1a18"
+						},
+						{
+							"key": "X-Runtime",
+							"value": "0.038624"
+						},
+						{
+							"key": "Server-Timing",
+							"value": "sql.active_record;dur=32.55322265625, instantiation.active_record;dur=0.11328125, endpoint_run_filters.grape;dur=1.368408203125, endpoint_run_validators.grape;dur=0.095703125, endpoint_render.grape;dur=33.903564453125, endpoint_run.grape;dur=35.681396484375, format_response.grape;dur=0.17822265625"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Wallet credited successfully\",\n    \"data\": {\n        \"wallet\": {\n            \"balance\": \"1002000.0\"\n        }\n    }\n}"
+				}
+			]
+		}
+	]
+}

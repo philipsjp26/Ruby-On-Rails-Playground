@@ -13,12 +13,5 @@ class Api::Init < Grape::API
   include Grape::Extensions::Hashie::Mash::ParamBuilder
   include ExceptionHandler
 
-  use Oauth::Guard::Oauth2
-
-  helpers do
-    def current_user
-      current_user
-    end
-  end
   mount Api::V1::Main
 end

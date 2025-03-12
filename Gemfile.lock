@@ -365,6 +365,7 @@ DEPENDENCIES
   puma (~> 5.0)
   racecar
   rails (~> 7.0.2)
+  rubocop
   rufus-scheduler
   sidekiq
   solargraph
